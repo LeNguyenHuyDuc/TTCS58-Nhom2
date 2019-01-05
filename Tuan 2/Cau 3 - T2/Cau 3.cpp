@@ -7,8 +7,7 @@
 # include <math.h>
 # include <conio.h>
 # include <Windows.h>
-#include <iterator>
-#include <sstream>
+# include <sstream>
 using namespace std;
 fstream f("input3-2.txt");
 struct O{
