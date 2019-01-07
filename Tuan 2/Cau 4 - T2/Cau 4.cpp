@@ -60,8 +60,8 @@ int Demghe (int lop[100], int phong[100], int k, int n, int c[100])
 		{
 			sumghe += abs(phong[i] - lop[a]);
 			a++;
-		}
-	return sumghe;*/		
+		}*/
+	return sumghe;		
 }
 //So lan chuyen ghe vao/ra it nhat
 void Minghe (int lop[100], int phong[100], int k, int n, int c[100], int i)
