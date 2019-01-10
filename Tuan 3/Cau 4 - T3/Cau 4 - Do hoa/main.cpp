@@ -4,6 +4,7 @@
 #include<fstream>
 #include<sstream>
 #include<stdlib.h>
+#include<winbgim.h>
 using namespace std;
 fstream f("dothi.txt");
 fstream g("caykhungmin.txt");
@@ -114,6 +115,43 @@ void Sapxep (canh E[100], int ncanh)
 				swap (E[i],E[j]);
 }
 /*
+	Ham lay toa do cua 1 dinh
+	Input: dinh - so hieu cua dinh dang xet
+		   x - toa do x cua dinh dang xet
+		   y - toa do y cua dinh dang xet
+	Output: Gan toa do cua dinh dang xet vao 2 bien x va y
+*/
+void LayToaDo (int dinh, int &x, int &y)
+{
+	switch(dinh)
+	{
+		case 1:
+			x = 400;
+			y = 350;
+			break;
+		case 2:
+			x = 500;
+			y = 250;
+			break;
+		case 3:
+			x = 650;
+			y = 250;
+			break;
+		case 4:
+			x = 750;
+			y = 350;
+			break;
+		case 5:
+			x = 650;
+			y = 450;
+			break;
+		case 6:
+			x = 500;
+			y = 450;
+			break;
+	}
+}
+/*
 	Ham tim cay khung be nhat cua do thi
 	Input: E[100] - mang luu tru cac canh
 		   goc[100] - mang luu tru dinh goc cua moi dinh trong do thi
@@ -126,6 +164,8 @@ int Caykhungmin (canh E[100], int goc[100], int ndinh, int ncanh)
 	int sum = 0;
 	int dem = 0;
 	int nT = 0;
+	int xdau, ydau;
+	int xcuoi, ycuoi;
 	canh T[100];
 	for (int i = 1; i <= ndinh; i++)
 		goc[i] = i;
@@ -140,6 +180,9 @@ int Caykhungmin (canh E[100], int goc[100], int ndinh, int ncanh)
 			for (int j = 1; j <= ndinh; j++)
 				if (goc[j] == tam2)
 					goc[j] = tam1;
+			LayToaDo(E[i].dinhdau,xdau,ydau);
+			LayToaDo(E[i].dinhcuoi,xcuoi,ycuoi);
+			line(xdau,ydau,xcuoi,ycuoi);		//Ve canh duoc lay tren man hinh do hoa
 			cout<<E[i].dinhdau<<"-"<<E[i].dinhcuoi<<": "<<E[i].trongso<<"\tLay\t";
 			T[nT] = E[i];
 			nT++;			
@@ -158,6 +201,7 @@ int Caykhungmin (canh E[100], int goc[100], int ndinh, int ncanh)
 				else
 					cout<<T[k].dinhdau<<"-"<<T[k].dinhcuoi<<", ";
 		cout<<"}"<<endl;
+		delay(1000);
 		if (dem == ndinh - 1)
 			break;
 	}
@@ -165,6 +209,7 @@ int Caykhungmin (canh E[100], int goc[100], int ndinh, int ncanh)
 }
 int main()
 {
+	
 	int ndinh;
 	int ncanh = 0;
 	canh E[100];
@@ -192,6 +237,36 @@ int main()
 		cout<<E[i].dinhdau<<"-"<<E[i].dinhcuoi<<": "<<E[i].trongso<<endl;
 	g<<"Cac canh cua cay khung be nhat: "<<endl;
 	cout<<endl<<"Lay cac canh co trong so tang dan sao cho khong tao thanh chu trinh, dung khi du "<<ndinh-1<<" canh: "<<endl;
+	initwindow(1280, 700);
+    cleardevice();
+    setcolor(10);
+    settextstyle(10, 0, 5);
+    circle(400,350,10);		//Dinh 1
+    setcolor(9);
+    outtextxy(350,350,"1");
+    setcolor(10);
+    circle(500,250,10);		//Dinh 2
+    setcolor(9);
+    outtextxy(500,190,"2");
+    setcolor(10);
+    circle(650,250,10);		//Dinh 3
+    setcolor(9);
+    outtextxy(650,190,"3");
+    setcolor(10);
+    circle(750,350,10);		//Dinh 4
+    setcolor(9);
+    outtextxy(775,350,"4");
+    setcolor(10);
+    circle(650,450,10);		//Dinh 5
+    setcolor(9);
+    outtextxy(650,460,"5");
+    setcolor(10);
+    circle(500,450,10);		//Dinh 6
+    setcolor(9);
+    outtextxy(500,460,"6");
+	setcolor(12);	
 	int sum = Caykhungmin(E,goc,ndinh,ncanh);
 	g<<"Tong trong so cua cay khung be nhat: "<<sum;		
+	while(!kbhit()) delay(1);
+    return 0;
 }
