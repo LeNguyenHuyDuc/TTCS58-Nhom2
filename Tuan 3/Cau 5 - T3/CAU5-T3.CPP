@@ -43,15 +43,22 @@ const char * nhap0x10()
 	const char *String;
 	union REGS regs;
 	struct SREGS segreg;
-	regs.h.ah=0x10;
+	regs.h.ah=0x0A;
 	regs.x.dx=FP_OFF(String);
 	segreg.ds=FP_SEG(String);
 	int86x(0x21,&regs,&regs,&segreg);
 	return String;
 }
+void xoamanhinh10h()
+{
+	union REGS regs;
+	regs.x.ax=2;
+	int86(0x10,&regs,&regs);
+}
 int main()
 {
 	clrscr();
+	xoamanhinh10h();
 	printf("Nhap vao 1 so nguyen/ki tu: ");
 	int x = nhap0x1();
 	printf("\nSo/Ki tu vua nhap la: ");
@@ -62,7 +69,6 @@ int main()
 	xuat0x2(x);
 	xuat0x9("\nNhap vao 1 chuoi: $");
 	const char *s=nhap0x10();
-
 	getch();
 	return 0;
 }
